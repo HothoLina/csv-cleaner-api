@@ -1,6 +1,9 @@
+from app.cleaner import inspect_csv
 from fastapi import APIRouter, UploadFile, File
 from pathlib import Path
 import shutil
+
+
 
 router = APIRouter()
 
@@ -23,7 +26,20 @@ def upload_csv(file: UploadFile = File(...)):
     with file_path.open("wb") as buffer:
         shutil.copyfileobj(file.file, buffer)
 
+    # Read the saved CSV file and return basic metadata
+    try:
+        csv_info = inspect_csv(file_path)
+    except Exception as e:
+        return {"message": "File uploaded but failed to read CSV", "error": str(e)}
+
     return {
         "message": "File uploaded successfully!",
-        "filename": file.filename
+        "filename": file.filename,
+        **csv_info
     }
+ 
+
+    
+    
+    
+   
