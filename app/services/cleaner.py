@@ -31,8 +31,24 @@ def remove_duplicates(df):
     return df, removed    
 
 
+# ///
+def remove_empty_rows(df):
+    """
+    Remove rows where every column is empty.
+    """
+    before = len(df)
 
-from pathlib import Path
+    df = df.dropna(how="all")
+
+    after = len(df)
+
+    removed = before - after
+
+    return df, removed
+
+
+
+
 
 def save_cleaned_csv(df, output_path: Path):
     """
@@ -50,7 +66,10 @@ def clean_csv(file_path: Path):
 
     df, duplicates_removed = remove_duplicates(df)
 
+    df, empty_rows_removed = remove_empty_rows(df)
+
     rows_after = len(df)
+    
 
     output_dir = Path("cleaned")
     output_dir.mkdir(exist_ok=True)
@@ -65,5 +84,6 @@ def clean_csv(file_path: Path):
         "rows_before": rows_before,
         "rows_after": rows_after,
         "duplicates_removed": duplicates_removed,
-        "output_path": str(output_path),
-    }    
+        "empty_rows_removed": empty_rows_removed,
+        "output_path": output_path,
+    } 
