@@ -1,5 +1,6 @@
 import pandas as pd
 from pathlib import Path
+import uuid
 
 
 def inspect_csv(file_path: Path):
@@ -54,7 +55,9 @@ def clean_csv(file_path: Path):
     output_dir = Path("cleaned")
     output_dir.mkdir(exist_ok=True)
 
-    output_path = output_dir / f"cleaned_{file_path.name}"
+    unique_id = uuid.uuid4().hex[:8]
+
+    output_path = output_dir / f"{unique_id}_cleaned_{file_path.name}"
 
     save_cleaned_csv(df, output_path)
 
