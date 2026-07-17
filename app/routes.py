@@ -1,4 +1,4 @@
-from app.services.cleaner import inspect_csv, remove_duplicates
+from app.services.cleaner import clean_csv
 from fastapi import APIRouter, UploadFile, File
 from pathlib import Path
 import shutil
@@ -28,15 +28,16 @@ def upload_csv(file: UploadFile = File(...)):
 
     # Read the saved CSV file and return basic metadata
     try:
-        csv_info = inspect_csv(file_path)
+        cleaning_report = clean_csv(file_path)
     except Exception as e:
         return {"message": "File uploaded but failed to read CSV", "error": str(e)}
-
     return {
-        "message": "File uploaded successfully!",
+        "message": "CSV cleaned successfully!",
         "filename": file.filename,
-        **csv_info
+        **cleaning_report
     }
+   
+    
  
 
     
