@@ -1,7 +1,7 @@
 import pandas as pd
 from pathlib import Path
 import uuid
-
+from app.services.report import generate_report
 
 def inspect_csv(file_path: Path):
     """
@@ -60,8 +60,14 @@ def clean_csv(file_path: Path):
     """
     Read a CSV, clean it, save it, and return statistics.
     """
+   
+    
     df = pd.read_csv(file_path)
-
+    
+    report = generate_report(df)
+    
+    print(report)
+    
     rows_before = len(df)
 
     df, duplicates_removed = remove_duplicates(df)
