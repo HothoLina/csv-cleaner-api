@@ -1,0 +1,5 @@
+2026-07-19 22:22:38,832 | INFO | Processing file: dirty_cafe_sales.csv
+2026-07-19 22:22:38,833 | INFO | Loaded CSV with 10000 rows.
+2026-07-19 22:22:41,478 | INFO | Removed 0 duplicate rows.
+2026-07-19 22:22:44,268 | INFO | Generated data quality reports.
+2026-07-19 22:22:44,269 | INFO | CSV cleaning completed successfully.

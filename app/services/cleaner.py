@@ -7,6 +7,7 @@ import pandas as pd
 
 from app.services.report import generate_report
 from app.services.quality import calculate_quality_score
+from app.core.logger import logger
 
 
 def inspect_csv(file_path: Path):
@@ -98,6 +99,9 @@ def clean_csv(file_path: Path):
     read_start = time.perf_counter()
     df = pd.read_csv(file_path)
     read_time = time.perf_counter() - read_start
+    
+    logger.info(f"Processing file: {file_path.name}")
+    logger.info(f"Loaded CSV with {len(df)} rows.")
 
     report_start = time.perf_counter()
     original_report = generate_report(df)
@@ -131,6 +135,7 @@ def clean_csv(file_path: Path):
         "step": "Remove Duplicates",
         "rows_removed": duplicates_removed,
     })
+    logger.info(f"Removed {duplicates_removed} duplicate rows.")
     clean_time = time.perf_counter() - clean_start
 
     rows_after = len(df)
@@ -149,8 +154,11 @@ def clean_csv(file_path: Path):
     cleaned_report = generate_report(df)
     cleaned_quality = calculate_quality_score(cleaned_report)
     final_report_time = time.perf_counter() - final_report_start
+    logger.info("Generated data quality reports.")
 
     total_time = time.perf_counter() - total_start
+
+    logger.info("CSV cleaning completed successfully.")
 
     return {
         "rows_before": rows_before,
