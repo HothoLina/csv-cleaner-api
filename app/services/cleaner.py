@@ -60,7 +60,6 @@ def trim_whitespace(df):
     df = df.copy()
     text_columns = df.select_dtypes(include=["object"]).columns
     for column in text_columns:
-        # Use fillna to avoid calling str on NaN
         df[column] = df[column].astype(str).str.strip()
     return df
 
@@ -87,6 +86,8 @@ def clean_csv(file_path: Path):
     Pipeline: Read → Remove empty rows → Trim whitespace → Standardize column names → Remove duplicates → Generate report → Save CSV
     Returns a dict with stats and `output_path`.
     """
+    cleaning_history = []
+
     total_start = time.perf_counter()
 
     read_start = time.perf_counter()
@@ -101,14 +102,34 @@ def clean_csv(file_path: Path):
 
     clean_start = time.perf_counter()
     df, empty_rows_removed = remove_empty_rows(df)
+    cleaning_history.append({
+        "step": "Remove Empty Rows",
+        "rows_removed": empty_rows_removed,
+    })
+
     df = trim_whitespace(df)
+    columns_trimmed = len(df.select_dtypes(include=["object"]).columns)
+    cleaning_history.append({
+        "step": "Trim Whitespace",
+        "columns_processed": columns_trimmed,
+    })
+
     df = standardize_column_names(df)
+    renamed_columns = len(df.columns)
+    cleaning_history.append({
+        "step": "Standardize Column Names",
+        "columns_renamed": renamed_columns,
+    })
+
     df, duplicates_removed = remove_duplicates(df)
+    cleaning_history.append({
+        "step": "Remove Duplicates",
+        "rows_removed": duplicates_removed,
+    })
     clean_time = time.perf_counter() - clean_start
 
     rows_after = len(df)
 
-    # Save CSV
     output_dir = Path("cleaned")
     output_dir.mkdir(parents=True, exist_ok=True)
 
@@ -143,5 +164,6 @@ def clean_csv(file_path: Path):
             "save_csv": round(save_time, 4),
             "cleaned_report": round(final_report_time, 4),
             "total": round(total_time, 4),
+            "cleaning_history": cleaning_history,
         },
     }
