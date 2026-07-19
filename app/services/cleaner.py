@@ -1,7 +1,12 @@
 import pandas as pd
 from pathlib import Path
+import pandas as pd
+from pathlib import Path
 import uuid
 from app.services.report import generate_report
+import re
+from app.services.quality import calculate_quality_score
+
 
 def inspect_csv(file_path: Path):
     """
@@ -14,40 +19,30 @@ def inspect_csv(file_path: Path):
         "columns": int(df.shape[1]),
         "column_names": df.columns.tolist(),
     }
-    
-    
+
+
 def remove_duplicates(df):
     """
     Remove duplicate rows from a DataFrame.
+    Returns (cleaned_df, removed_count).
     """
     before = len(df)
-
     df = df.drop_duplicates()
-
     after = len(df)
-
     removed = before - after
-
-    return df, removed    
-
-
-# ///
-def remove_empty_rows(df):
-    """
-    Remove rows where every column is empty.
-    """
-    before = len(df)
-
-    df = df.dropna(how="all")
-
-    after = len(df)
-
-    removed = before - after
-
     return df, removed
 
 
-
+def remove_empty_rows(df):
+    """
+    Remove rows where every column is empty.
+    Returns (cleaned_df, removed_count).
+    """
+    before = len(df)
+    df = df.dropna(how="all")
+    after = len(df)
+    removed = before - after
+    return df, removed
 
 
 def save_cleaned_csv(df, output_path: Path):
@@ -55,35 +50,63 @@ def save_cleaned_csv(df, output_path: Path):
     Save the cleaned DataFrame to a CSV file.
     """
     df.to_csv(output_path, index=False)
-    
+
+
+def trim_whitespace(df):
+    """
+    Remove leading and trailing whitespace from text columns.
+    """
+    df = df.copy()
+    text_columns = df.select_dtypes(include=["object"]).columns
+    for column in text_columns:
+        # Use fillna to avoid calling str on NaN
+        df[column] = df[column].astype(str).str.strip()
+    return df
+
+
+def standardize_column_names(df):
+    """
+    Standardize DataFrame column names.
+    """
+    new_columns = []
+    for column in df.columns:
+        col = str(column)
+        col = col.strip().lower()
+        col = col.replace(" ", "_")
+        col = col.replace("-", "_")
+        col = re.sub(r"_+", "_", col)
+        new_columns.append(col)
+    df.columns = new_columns
+    return df
+
+
 def clean_csv(file_path: Path):
     """
     Read a CSV, clean it, save it, and return statistics.
+    Pipeline: Read → Remove empty rows → Trim whitespace → Standardize column names → Remove duplicates → Generate report → Save CSV
+    Returns a dict with stats and `output_path`.
     """
-   
-    
     df = pd.read_csv(file_path)
-    
-    report = generate_report(df)
-    
-    print(report)
-    
+
+    original_report = generate_report(df)
+    original_quality = calculate_quality_score(original_report)
     rows_before = len(df)
 
+    df, empty_rows_removed = remove_empty_rows(df)
+    df = trim_whitespace(df)
+    df = standardize_column_names(df)
     df, duplicates_removed = remove_duplicates(df)
 
-    df, empty_rows_removed = remove_empty_rows(df)
-
     rows_after = len(df)
-    
+    cleaned_report = generate_report(df)
+    cleaned_quality = calculate_quality_score(cleaned_report)
 
+    # Save CSV
     output_dir = Path("cleaned")
-    output_dir.mkdir(exist_ok=True)
+    output_dir.mkdir(parents=True, exist_ok=True)
 
     unique_id = uuid.uuid4().hex[:8]
-
     output_path = output_dir / f"{unique_id}_cleaned_{file_path.name}"
-
     save_cleaned_csv(df, output_path)
 
     return {
@@ -91,5 +114,9 @@ def clean_csv(file_path: Path):
         "rows_after": rows_after,
         "duplicates_removed": duplicates_removed,
         "empty_rows_removed": empty_rows_removed,
-        "output_path": output_path,
-    } 
+        "output_path": str(output_path),
+        "original_report": original_report,
+        "cleaned_report": cleaned_report,
+        "original_quality": original_quality,
+        "cleaned_quality": cleaned_quality,
+    }
