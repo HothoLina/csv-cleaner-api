@@ -14,6 +14,11 @@ def inspect_csv(file_path: Path):
     Read a CSV file and return basic information about it.
     """
     df = pd.read_csv(file_path)
+    
+    print(df.head())
+    print(df.dtypes)
+    print(df["quantity"].head())   # or price
+    print(type(df["quantity"].iloc[0]))  # or price
 
     return {
         "rows": int(df.shape[0]),

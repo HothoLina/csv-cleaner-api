@@ -31,7 +31,16 @@ def calculate_quality_score(report):
         }
 
     total_cells = rows * columns
-    missing_total = sum(int(v or 0) for v in missing_values.values())
+    # missing_values may map column -> count OR column -> {"count": x, "percentage": y}
+    def _extract_missing_count(v):
+        if isinstance(v, dict):
+            return int(v.get("count", 0) or 0)
+        try:
+            return int(v or 0)
+        except Exception:
+            return 0
+
+    missing_total = sum(_extract_missing_count(v) for v in missing_values.values())
     missing_ratio = min(1.0, missing_total / total_cells)
 
     completeness_score = (1.0 - missing_ratio) * 50.0
