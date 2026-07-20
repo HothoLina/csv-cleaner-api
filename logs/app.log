@@ -3,3 +3,160 @@
 2026-07-19 22:22:41,478 | INFO | Removed 0 duplicate rows.
 2026-07-19 22:22:44,268 | INFO | Generated data quality reports.
 2026-07-19 22:22:44,269 | INFO | CSV cleaning completed successfully.
+2026-07-20 12:02:53,824 | ERROR | CSV parsing failed.
+Traceback (most recent call last):
+  File "C:\Users\PC\Documents\csv-cleaner-api\app\services\cleaner.py", line 103, in clean_csv
+    df = pd.read_csv(file_path)
+  File "C:\Users\PC\Documents\csv-cleaner-api\venv\Lib\site-packages\pandas\io\parsers\readers.py", line 873, in read_csv
+    return _read(filepath_or_buffer, kwds)
+  File "C:\Users\PC\Documents\csv-cleaner-api\venv\Lib\site-packages\pandas\io\parsers\readers.py", line 306, in _read
+    return parser.read(nrows)
+           ~~~~~~~~~~~^^^^^^^
+  File "C:\Users\PC\Documents\csv-cleaner-api\venv\Lib\site-packages\pandas\io\parsers\readers.py", line 1947, in read
+    ) = self._engine.read(  # type: ignore[attr-defined]
+        ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        nrows
+        ^^^^^
+    )
+    ^
+  File "C:\Users\PC\Documents\csv-cleaner-api\venv\Lib\site-packages\pandas\io\parsers\c_parser_wrapper.py", line 215, in read
+    chunks = self._reader.read_low_memory(nrows)
+  File "pandas/_libs/parsers.pyx", line 832, in pandas._libs.parsers.TextReader.read_low_memory
+  File "pandas/_libs/parsers.pyx", line 897, in pandas._libs.parsers.TextReader._read_rows
+  File "pandas/_libs/parsers.pyx", line 868, in pandas._libs.parsers.TextReader._tokenize_rows
+  File "pandas/_libs/parsers.pyx", line 885, in pandas._libs.parsers.TextReader._check_tokenize_status
+  File "pandas/_libs/parsers.pyx", line 2084, in pandas._libs.parsers.raise_parser_error
+pandas.errors.ParserError: Error tokenizing data. C error: Expected 1 fields in line 4, saw 2
+
+2026-07-20 12:06:02,645 | ERROR | CSV parsing failed.
+Traceback (most recent call last):
+  File "C:\Users\PC\Documents\csv-cleaner-api\app\services\cleaner.py", line 103, in clean_csv
+    df = pd.read_csv(file_path)
+  File "C:\Users\PC\Documents\csv-cleaner-api\venv\Lib\site-packages\pandas\io\parsers\readers.py", line 873, in read_csv
+    return _read(filepath_or_buffer, kwds)
+  File "C:\Users\PC\Documents\csv-cleaner-api\venv\Lib\site-packages\pandas\io\parsers\readers.py", line 306, in _read
+    return parser.read(nrows)
+           ~~~~~~~~~~~^^^^^^^
+  File "C:\Users\PC\Documents\csv-cleaner-api\venv\Lib\site-packages\pandas\io\parsers\readers.py", line 1947, in read
+    ) = self._engine.read(  # type: ignore[attr-defined]
+        ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        nrows
+        ^^^^^
+    )
+    ^
+  File "C:\Users\PC\Documents\csv-cleaner-api\venv\Lib\site-packages\pandas\io\parsers\c_parser_wrapper.py", line 215, in read
+    chunks = self._reader.read_low_memory(nrows)
+  File "pandas/_libs/parsers.pyx", line 832, in pandas._libs.parsers.TextReader.read_low_memory
+  File "pandas/_libs/parsers.pyx", line 897, in pandas._libs.parsers.TextReader._read_rows
+  File "pandas/_libs/parsers.pyx", line 868, in pandas._libs.parsers.TextReader._tokenize_rows
+  File "pandas/_libs/parsers.pyx", line 885, in pandas._libs.parsers.TextReader._check_tokenize_status
+  File "pandas/_libs/parsers.pyx", line 2084, in pandas._libs.parsers.raise_parser_error
+pandas.errors.ParserError: Error tokenizing data. C error: Expected 1 fields in line 4, saw 2
+
+2026-07-20 12:14:14,477 | ERROR | 'utf-8' codec can't decode byte 0x87 in position 10: invalid start byte
+Traceback (most recent call last):
+  File "C:\Users\PC\Documents\csv-cleaner-api\venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\PC\Documents\csv-cleaner-api\venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "C:\Users\PC\Documents\csv-cleaner-api\venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "C:\Users\PC\Documents\csv-cleaner-api\venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "C:\Users\PC\Documents\csv-cleaner-api\venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "C:\Users\PC\Documents\csv-cleaner-api\venv\Lib\site-packages\starlette\routing.py", line 660, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\Users\PC\Documents\csv-cleaner-api\venv\Lib\site-packages\fastapi\routing.py", line 2683, in app
+    await route.handle(scope, receive, send)
+  File "C:\Users\PC\Documents\csv-cleaner-api\venv\Lib\site-packages\fastapi\routing.py", line 1753, in handle
+    await self.original_router.handle(scope, receive, send)
+  File "C:\Users\PC\Documents\csv-cleaner-api\venv\Lib\site-packages\fastapi\routing.py", line 2738, in handle
+    await included_router._handle_selected(scope, receive, send)
+  File "C:\Users\PC\Documents\csv-cleaner-api\venv\Lib\site-packages\fastapi\routing.py", line 1773, in _handle_selected
+    await original_route.handle(scope, receive, send)
+  File "C:\Users\PC\Documents\csv-cleaner-api\venv\Lib\site-packages\fastapi\routing.py", line 1264, in handle
+    await app(scope, receive, send)
+  File "C:\Users\PC\Documents\csv-cleaner-api\venv\Lib\site-packages\fastapi\routing.py", line 150, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "C:\Users\PC\Documents\csv-cleaner-api\venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "C:\Users\PC\Documents\csv-cleaner-api\venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "C:\Users\PC\Documents\csv-cleaner-api\venv\Lib\site-packages\fastapi\routing.py", line 136, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "C:\Users\PC\Documents\csv-cleaner-api\venv\Lib\site-packages\fastapi\routing.py", line 690, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "C:\Users\PC\Documents\csv-cleaner-api\venv\Lib\site-packages\fastapi\routing.py", line 346, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\PC\Documents\csv-cleaner-api\venv\Lib\site-packages\starlette\concurrency.py", line 34, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\PC\Documents\csv-cleaner-api\venv\Lib\site-packages\anyio\to_thread.py", line 65, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        func, args, abandon_on_cancel=abandon_on_cancel, limiter=limiter
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\PC\Documents\csv-cleaner-api\venv\Lib\site-packages\anyio\_backends\_asyncio.py", line 2641, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "C:\Users\PC\Documents\csv-cleaner-api\venv\Lib\site-packages\anyio\_backends\_asyncio.py", line 1033, in run
+    result = context.run(func, *args)
+  File "C:\Users\PC\Documents\csv-cleaner-api\app\routes.py", line 29, in upload_csv
+    cleaning_report = clean_csv(file_path)
+  File "C:\Users\PC\Documents\csv-cleaner-api\app\services\cleaner.py", line 103, in clean_csv
+    df = pd.read_csv(file_path)
+  File "C:\Users\PC\Documents\csv-cleaner-api\venv\Lib\site-packages\pandas\io\parsers\readers.py", line 873, in read_csv
+    return _read(filepath_or_buffer, kwds)
+  File "C:\Users\PC\Documents\csv-cleaner-api\venv\Lib\site-packages\pandas\io\parsers\readers.py", line 300, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+  File "C:\Users\PC\Documents\csv-cleaner-api\venv\Lib\site-packages\pandas\io\parsers\readers.py", line 1645, in __init__
+    self._engine = self._make_engine(f, self.engine)
+                   ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\PC\Documents\csv-cleaner-api\venv\Lib\site-packages\pandas\io\parsers\readers.py", line 1922, in _make_engine
+    return mapping[engine](f, **self.options)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\PC\Documents\csv-cleaner-api\venv\Lib\site-packages\pandas\io\parsers\c_parser_wrapper.py", line 95, in __init__
+    self._reader = parsers.TextReader(src, **kwds)
+                   ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "pandas/_libs/parsers.pyx", line 568, in pandas._libs.parsers.TextReader.__cinit__
+  File "pandas/_libs/parsers.pyx", line 657, in pandas._libs.parsers.TextReader._get_header
+  File "pandas/_libs/parsers.pyx", line 868, in pandas._libs.parsers.TextReader._tokenize_rows
+  File "pandas/_libs/parsers.pyx", line 885, in pandas._libs.parsers.TextReader._check_tokenize_status
+  File "pandas/_libs/parsers.pyx", line 2076, in pandas._libs.parsers.raise_parser_error
+  File "<frozen codecs>", line 325, in decode
+UnicodeDecodeError: 'utf-8' codec can't decode byte 0x87 in position 10: invalid start byte
+2026-07-20 12:16:51,794 | ERROR | CSV parsing failed.
+Traceback (most recent call last):
+  File "C:\Users\PC\Documents\csv-cleaner-api\app\services\cleaner.py", line 103, in clean_csv
+    df = pd.read_csv(file_path)
+  File "C:\Users\PC\Documents\csv-cleaner-api\venv\Lib\site-packages\pandas\io\parsers\readers.py", line 873, in read_csv
+    return _read(filepath_or_buffer, kwds)
+  File "C:\Users\PC\Documents\csv-cleaner-api\venv\Lib\site-packages\pandas\io\parsers\readers.py", line 306, in _read
+    return parser.read(nrows)
+           ~~~~~~~~~~~^^^^^^^
+  File "C:\Users\PC\Documents\csv-cleaner-api\venv\Lib\site-packages\pandas\io\parsers\readers.py", line 1947, in read
+    ) = self._engine.read(  # type: ignore[attr-defined]
+        ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        nrows
+        ^^^^^
+    )
+    ^
+  File "C:\Users\PC\Documents\csv-cleaner-api\venv\Lib\site-packages\pandas\io\parsers\c_parser_wrapper.py", line 215, in read
+    chunks = self._reader.read_low_memory(nrows)
+  File "pandas/_libs/parsers.pyx", line 832, in pandas._libs.parsers.TextReader.read_low_memory
+  File "pandas/_libs/parsers.pyx", line 897, in pandas._libs.parsers.TextReader._read_rows
+  File "pandas/_libs/parsers.pyx", line 868, in pandas._libs.parsers.TextReader._tokenize_rows
+  File "pandas/_libs/parsers.pyx", line 885, in pandas._libs.parsers.TextReader._check_tokenize_status
+  File "pandas/_libs/parsers.pyx", line 2084, in pandas._libs.parsers.raise_parser_error
+pandas.errors.ParserError: Error tokenizing data. C error: Expected 1 fields in line 4, saw 2
+
+2026-07-20 12:16:51,815 | ERROR | The uploaded file is not a valid CSV.

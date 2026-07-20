@@ -4,10 +4,12 @@ import re
 from pathlib import Path
 
 import pandas as pd
+from pandas.errors import ParserError
 
 from app.services.report import generate_report
 from app.services.quality import calculate_quality_score
 from app.core.logger import logger
+from app.core.exceptions import EmptyCSVError, InvalidCSVError
 
 
 def inspect_csv(file_path: Path):
@@ -97,8 +99,15 @@ def clean_csv(file_path: Path):
     total_start = time.perf_counter()
 
     read_start = time.perf_counter()
-    df = pd.read_csv(file_path)
+    try:
+        df = pd.read_csv(file_path)
+    except ParserError as exc:
+        logger.error("CSV parsing failed.", exc_info=exc)
+        raise InvalidCSVError()
     read_time = time.perf_counter() - read_start
+
+    if df.empty:
+        raise EmptyCSVError()
     
     logger.info(f"Processing file: {file_path.name}")
     logger.info(f"Loaded CSV with {len(df)} rows.")

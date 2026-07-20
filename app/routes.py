@@ -26,12 +26,7 @@ def upload_csv(file: UploadFile = File(...)):
     with file_path.open("wb") as buffer:
         shutil.copyfileobj(file.file, buffer)
 
-    # Read the saved CSV file and return basic metadata
-    try:
-        cleaning_report = clean_csv(file_path)
-    except Exception as e:
-        return {"message": "File uploaded but failed to read CSV", "error": str(e)}
-
+    cleaning_report = clean_csv(file_path)
     cleaned_file = cleaning_report.pop("output_path")
 
     return {
