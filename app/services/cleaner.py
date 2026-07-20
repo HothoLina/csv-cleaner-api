@@ -106,8 +106,9 @@ def clean_csv(file_path: Path):
         raise InvalidCSVError()
     read_time = time.perf_counter() - read_start
 
-    if df.empty:
-        raise EmptyCSVError()
+    # Check if DataFrame is empty or has no columns (invalid CSV)
+    if df.empty or df.shape[1] == 0:
+        raise InvalidCSVError()
     
     logger.info(f"Processing file: {file_path.name}")
     logger.info(f"Loaded CSV with {len(df)} rows.")
