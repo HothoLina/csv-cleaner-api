@@ -4,6 +4,8 @@ from fastapi.responses import FileResponse
 from pathlib import Path
 import shutil
 
+from app.core.settings import settings
+
 
 router = APIRouter()
 
@@ -18,7 +20,7 @@ def health_check():
 
 @router.post("/upload")
 def upload_csv(file: UploadFile = File(...)):
-    upload_dir = Path("uploads")
+    upload_dir = Path(settings.UPLOAD_DIR)
     upload_dir.mkdir(exist_ok=True)
 
     file_path = upload_dir / file.filename
@@ -39,7 +41,7 @@ def upload_csv(file: UploadFile = File(...)):
 
 @router.get("/download/{filename}")
 def download_file(filename: str):
-    file_path = Path("cleaned") / filename
+    file_path = Path("app/data/cleaned") / filename
 
     if not file_path.exists():
         return {"error": "File not found"}

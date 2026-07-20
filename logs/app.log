@@ -160,3 +160,28 @@ Traceback (most recent call last):
 pandas.errors.ParserError: Error tokenizing data. C error: Expected 1 fields in line 4, saw 2
 
 2026-07-20 12:16:51,815 | ERROR | The uploaded file is not a valid CSV.
+2026-07-20 17:00:58,796 | INFO | Processing file: retail_store_sales.csv
+2026-07-20 17:00:58,797 | INFO | Loaded CSV with 12575 rows.
+2026-07-20 17:01:02,762 | INFO | Removed 0 duplicate rows.
+2026-07-20 17:01:06,544 | INFO | Generated data quality reports.
+2026-07-20 17:01:06,545 | INFO | CSV cleaning completed successfully.
+2026-07-20 17:05:15,326 | INFO | Processing file: us-shein-appliances-3987.csv
+2026-07-20 17:05:15,327 | INFO | Loaded CSV with 3986 rows.
+2026-07-20 17:05:18,676 | INFO | Removed 209 duplicate rows.
+2026-07-20 17:05:21,920 | INFO | Generated data quality reports.
+2026-07-20 17:05:21,920 | INFO | CSV cleaning completed successfully.
+2026-07-20 17:08:36,520 | INFO | Processing file: us-shein-appliances-3987.csv
+2026-07-20 17:08:36,520 | INFO | Loaded CSV with 3986 rows.
+2026-07-20 17:08:39,958 | INFO | Removed 209 duplicate rows.
+2026-07-20 17:08:43,424 | INFO | Generated data quality reports.
+2026-07-20 17:08:43,425 | INFO | CSV cleaning completed successfully.
+2026-07-20 17:10:20,911 | INFO | Processing file: dirty_cafe_sales.csv
+2026-07-20 17:10:20,912 | INFO | Loaded CSV with 10000 rows.
+2026-07-20 17:10:23,425 | INFO | Removed 0 duplicate rows.
+2026-07-20 17:10:25,568 | INFO | Generated data quality reports.
+2026-07-20 17:10:25,569 | INFO | CSV cleaning completed successfully.
+2026-07-20 17:13:40,060 | INFO | Processing file: retail_store_sales.csv
+2026-07-20 17:13:40,061 | INFO | Loaded CSV with 12575 rows.
+2026-07-20 17:13:43,674 | INFO | Removed 0 duplicate rows.
+2026-07-20 17:13:47,817 | INFO | Generated data quality reports.
+2026-07-20 17:13:47,817 | INFO | CSV cleaning completed successfully.

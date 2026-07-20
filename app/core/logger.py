@@ -1,14 +1,18 @@
 import logging
 from pathlib import Path
 
+from app.core.settings import settings
+
 # Create logs directory if it doesn't exist
-Path("logs").mkdir(exist_ok=True)
+Path(settings.LOG_DIR).mkdir(exist_ok=True)
 
 logging.basicConfig(
-    level=logging.INFO,
-    format="%(asctime)s | %(levelname)s | %(message)s",
+    level=getattr(logging, settings.LOG_LEVEL.upper()),
+    format="%(asctime)s | %(levelname)s | %(message)s\n",
     handlers=[
-        logging.FileHandler("logs/app.log"),
+        logging.FileHandler(
+            Path(settings.LOG_DIR) / settings.LOG_FILE
+        ),
         logging.StreamHandler()
     ]
 )

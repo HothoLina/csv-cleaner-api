@@ -149,7 +149,7 @@ def clean_csv(file_path: Path):
 
     rows_after = len(df)
 
-    output_dir = Path("cleaned")
+    output_dir = Path("app/data/cleaned")
     output_dir.mkdir(parents=True, exist_ok=True)
 
     unique_id = uuid.uuid4().hex[:8]
