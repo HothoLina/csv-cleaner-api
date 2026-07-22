@@ -10,6 +10,16 @@ This project demonstrates modern backend engineering practices including API dev
 
 ---
 
+## Screenshots
+
+### Swagger UI
+
+![Swagger UI](images/swagger-ui.png)
+
+### Example API Response
+
+![API Response](images/api-response.png)
+
 ## Features
 
 ### Data Processing
