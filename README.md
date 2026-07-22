@@ -1,5 +1,10 @@
 # CSV Cleaner API
 
+![Tests](https://github.com/HothoLina/csv-cleaner-api/actions/workflows/python-tests.yml/badge.svg)
+![Python](https://img.shields.io/badge/Python-3.12-blue?logo=python)
+![FastAPI](https://img.shields.io/badge/FastAPI-Framework-009688?logo=fastapi)
+![Docker](https://img.shields.io/badge/Docker-Containerized-2496ED?logo=docker)
+
 > A professional FastAPI service for automated CSV data cleaning, quality analysis, and reporting.
 
 ## Overview
