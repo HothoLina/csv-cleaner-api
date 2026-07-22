@@ -1,10 +1,14 @@
-# Virtual Environment
+# ==========================
+# Virtual Environments
+# ==========================
 venv/
+.venv/
 env/
 ENV/
-.venv
 
+# ==========================
 # Python Cache & Artifacts
+# ==========================
 __pycache__/
 *.py[cod]
 *$py.class
@@ -12,48 +16,54 @@ __pycache__/
 .Python
 *.egg
 *.egg-info/
-dist/
 build/
+dist/
 
-# IDE & Editor
-.vscode/
-.idea/
-*.swp
-*.swo
-*~
-.DS_Store
-Thumbs.db
-
+# ==========================
 # Environment Variables
+# ==========================
 .env
 .env.local
 .env.*.local
 
-# Logs & Generated Files
-logs/
+# ==========================
+# Logs
+# ==========================
 *.log
+logs/
 my_logs/
 
-# Uploads & User Uploads
+# ==========================
+# User Uploads & Generated Files
+# ==========================
 uploads/
 my_uploads/
-
-# Cleaned/Processed Data
 cleaned/
-app/data/cleaned/*.csv
 data/cleaned/
+app/data/cleaned/
 
+# ==========================
 # Testing
+# ==========================
 .pytest_cache/
 .coverage
 htmlcov/
 .tox/
 
-# IDE Workspace
+# ==========================
+# IDE & Editors
+# ==========================
+.vscode/
+.idea/
 *.code-workspace
+*.swp
+*.swo
+*~
 
-# OS Files
+# ==========================
+# Operating System Files
+# ==========================
 .DS_Store
+Thumbs.db
 .AppleDouble
 .LSOverride
-*.swp
