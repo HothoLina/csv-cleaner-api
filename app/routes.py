@@ -8,6 +8,7 @@ from app.core.settings import settings
 
 
 router = APIRouter()
+router = APIRouter()
 
 
 @router.get("/health")
